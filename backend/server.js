@@ -8,14 +8,8 @@ connectDB();
 
 const app = express();
 
-// ✅ FIXED CORS (ALLOW ALL FOR NOW)
-app.use(
-  cors({
-    origin: "*",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+// Temporary open CORS fix
+app.use(cors());
 
 app.use(express.json());
 
@@ -28,7 +22,7 @@ app.use("/api/placements", require("./routes/placementRoutes"));
 app.use("/api/ai", require("./routes/aiRoutes"));
 
 app.use((error, req, res, next) => {
-  return res.status(400).json({
+  res.status(400).json({
     message: error.message || "Request failed.",
   });
 });
